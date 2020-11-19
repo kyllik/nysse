@@ -35,3 +35,13 @@ void Ufo::setSpeed(int v)
 {
     speed_ = v;
 }
+
+void Ufo::setCity(std::shared_ptr<Interface::ICity> city)
+{
+    city_ = city;
+}
+
+void Ufo::capture(std::shared_ptr<Interface::IActor>)
+{
+
+}
