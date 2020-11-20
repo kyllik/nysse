@@ -14,8 +14,8 @@ City::~City()
 
 void City::setBackground(QImage &basicbackground, QImage &bigbackground)
 {
-    background_ = basicbackground;
-    ui_->setPicture(background_);
+    backgroundSmall_ = basicbackground;
+    backGroundBig_ = bigbackground;
 }
 void City::setClock(QTime clock)
 {
@@ -55,7 +55,13 @@ void City::actorMoved(std::shared_ptr<Interface::IActor> actor)
 {
 
 }
+
 std::vector<std::shared_ptr<Interface::IActor> > City::getNearbyActors(Interface::Location loc) const
 {
 
+}
+
+bool City::isGameOver() const
+{
+    return false;
 }

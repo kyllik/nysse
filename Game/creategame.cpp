@@ -3,5 +3,7 @@
 
 std::shared_ptr<Interface::ICity> Interface::createGame()
 {
-    return nullptr;
+    std::shared_ptr<Interface::ICity> sp;
+    sp = std::make_shared<City>();
+    return sp;
 }

@@ -2,17 +2,23 @@
 #define GAMEENGINE_HH
 #include "graphics/simplemainwindow.hh"
 #include "interfaces/icity.hh"
+#include "core/logic.hh"
+
+const QString DEFAULT_BACKGROUND_SMALL = ":/offlinedata/offlinedata/kartta_pieni_500x500.png";
+const QString DEFAULT_BACKGROUND_BIG = ":/offlinedata/offlinedata/kartta_iso_1095x592.png";
 
 class GameEngine
 {
 public:
     GameEngine();
 
-    void startGame();
-    void endGame();
+    void start();
+    void end();
 
 private:
     std::shared_ptr<CourseSide::SimpleMainWindow> ui_;
+    std::shared_ptr<Interface::ICity> city_;
+    std::shared_ptr<CourseSide::Logic> logic_;
 };
 
 #endif // GAMEENGINE_HH
