@@ -4,7 +4,13 @@
 #include "interfaces/icity.hh"
 #include "interfaces/iactor.hh"
 #include "interfaces/istop.hh"
+#include "actors/nysse.hh"
+#include "actors/passenger.hh"
+#include "actors/stop.hh"
 #include "graphics/simplemainwindow.hh"
+
+#include <QDebug>
+#include <QTime>
 
 const QString DEFAULT_BACKGROUND_SMALL = ":/offline/offline/kartta_pieni_500x500.png";
 const QString DEFAULT_BACKGROUND_BIG = ":/offline/offline/kartta_iso_1095x592.png";
@@ -28,8 +34,12 @@ public:
     std::vector<std::shared_ptr<Interface::IActor> > getNearbyActors(Interface::Location loc) const override;
 
 private:
+    std::vector< std::shared_ptr<Interface::IActor> > actors_;
+    std::vector< std::shared_ptr<CourseSide::Stop> > stops_;
+
     QImage background_;
-    CourseSide::SimpleMainWindow ui_;
+    QTime clock_;
+    std::shared_ptr<CourseSide::SimpleMainWindow> ui_;
 };
 
 #endif // CITY_HH
