@@ -5,6 +5,7 @@
 
 #include <iostream>
 #include <QImage>
+#include <QDebug>
 
 
 GameEngine::GameEngine() :
@@ -25,4 +26,7 @@ void GameEngine::start()
     city_->setBackground(backgroundSmall,backgroundBig);
     ui_->setPicture(backgroundSmall);
 
+    logic_->fileConfig();
+    logic_->setTime(9,0);
+    logic_->finalizeGameStart();
 }
