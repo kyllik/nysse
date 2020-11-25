@@ -40,3 +40,5 @@ HEADERS += \
     city.hh \
     gameengine.hh \
     ufo.hh
+
+FORMS +=

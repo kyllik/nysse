@@ -26,7 +26,7 @@ public:
     void setClock(QTime clock) override;
     void addStop(std::shared_ptr<Interface::IStop> stop) override;
     void startGame() override;
-    void addActor(std::shared_ptr<Interface::IActor> newactor) override;
+    void addActor(std::shared_ptr<Interface::IActor> newactor);
     void removeActor(std::shared_ptr<Interface::IActor> actor) override;
     void actorRemoved(std::shared_ptr<Interface::IActor> actor) override;
     bool findActor(std::shared_ptr<Interface::IActor> actor) const override;
@@ -41,6 +41,7 @@ private:
     QImage backgroundSmall_;
     QImage backGroundBig_;
     QTime clock_;
+    std::shared_ptr<CourseSide::SimpleMainWindow> ui_;
 };
 
 #endif // CITY_HH
