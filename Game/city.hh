@@ -8,6 +8,8 @@
 #include "actors/passenger.hh"
 #include "actors/stop.hh"
 #include "graphics/simplemainwindow.hh"
+#include "graphics/simpleactoritem.hh"
+#include "ufo.hh"
 
 #include <QDebug>
 #include <QTime>
@@ -34,13 +36,20 @@ public:
     std::vector<std::shared_ptr<Interface::IActor> > getNearbyActors(Interface::Location loc) const override;
     bool isGameOver() const override;
 
+    std::shared_ptr<CourseSide::SimpleMainWindow> getUi();
+
 private:
     std::vector< std::shared_ptr<Interface::IActor> > actors_;
-    std::vector< std::shared_ptr<CourseSide::Stop> > stops_;
+    std::vector< std::shared_ptr<Interface::IStop> > stops_;
+    std::map< std::shared_ptr<Interface::IActor>, std::shared_ptr<CourseSide::SimpleActorItem> > items_;
+
+    bool gameOver_;
 
     QImage backgroundSmall_;
     QImage backGroundBig_;
     QTime clock_;
+    std::shared_ptr<CourseSide::SimpleMainWindow> ui_;
+
 };
 
 #endif // CITY_HH

@@ -7,6 +7,8 @@
 
 #include <vector>
 
+const int CAPTURE_RANGE = 5;
+
 class Ufo : public virtual Interface::IActor
 {
 public:
