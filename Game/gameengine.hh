@@ -8,9 +8,6 @@
 #include <streambuf>
 #include "offlinereader.hh"
 
-const QString DEFAULT_BACKGROUND_SMALL = ":/offlinedata/offlinedata/kartta_pieni_500x500.png";
-const QString DEFAULT_BACKGROUND_BIG = ":/offlinedata/offlinedata/kartta_iso_1095x592.png";
-
 class GameEngine
 {
 public:

@@ -3,7 +3,8 @@
 
 std::shared_ptr<Interface::ICity> Interface::createGame()
 {
-    std::shared_ptr<Interface::ICity> sp;
-    sp = std::make_shared<City>();
-    return sp;
+    std::shared_ptr<CourseSide::SimpleMainWindow> ui = std::make_shared<CourseSide::SimpleMainWindow>();
+    std::shared_ptr<Interface::ICity> city;
+    city = std::make_shared<City>(ui);
+    return city;
 }

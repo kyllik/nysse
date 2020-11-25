@@ -4,8 +4,9 @@
 #include <iostream>
 #include <vector>
 
-City::City() :
-    gameOver_(false)
+City::City(std::shared_ptr<CourseSide::SimpleMainWindow> ui) :
+    gameOver_(false),
+    ui_(ui)
 {
 
 }
@@ -20,6 +21,7 @@ void City::setBackground(QImage &basicbackground, QImage &bigbackground)
     backgroundSmall_ = basicbackground;
     backGroundBig_ = bigbackground;
 }
+
 void City::setClock(QTime clock)
 {
     clock_ = clock;
@@ -28,16 +30,27 @@ void City::setClock(QTime clock)
 void City::addStop(std::shared_ptr<Interface::IStop> stop)
 {
     stops_.push_back(stop);
+    int x = stop->getLocation().giveX();
+    int y = stop->getLocation().giveY();
+
+    std::shared_ptr<CourseSide::SimpleActorItem> stopItem =
+            std::make_shared<CourseSide::SimpleActorItem>(x,y);
+    stopItems_.insert(std::pair<std::shared_ptr<Interface::IStop>,
+                      std::shared_ptr<CourseSide::SimpleActorItem>>(stop,stopItem));
+    ui_->addActor(x,500-y);
 }
 
 void City::startGame()
 {
-
+    ui_->show();
+    ui_->setPicture(backgroundSmall_);
 }
+
 void City::addActor(std::shared_ptr<Interface::IActor> newactor)
 {
     actors_.push_back(newactor);
 }
+
 void City::removeActor(std::shared_ptr<Interface::IActor> actor)
 {
     actor->remove();
@@ -79,9 +92,4 @@ std::vector<std::shared_ptr<Interface::IActor> > City::getNearbyActors(Interface
 bool City::isGameOver() const
 {
     return gameOver_;
-}
-
-std::shared_ptr<CourseSide::SimpleMainWindow> City::getUi()
-{
-    return ui_;
 }
