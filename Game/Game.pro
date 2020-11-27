@@ -10,6 +10,8 @@ SOURCES += \
     creategame.cpp \
     gameengine.cpp \
     main.cc \
+    mainwindow.cpp \
+    rectitem.cpp \
     ufo.cpp
 
 win32:CONFIG(release, debug|release): LIBS += \
@@ -39,6 +41,9 @@ else:unix: PRE_TARGETDEPS += \
 HEADERS += \
     city.hh \
     gameengine.hh \
+    mainwindow.h \
+    rectitem.h \
     ufo.hh
 
-FORMS +=
+FORMS += \
+    mainwindow.ui

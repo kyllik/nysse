@@ -7,5 +7,6 @@ int main(int argc, char *argv[])
     Q_INIT_RESOURCE(offlinedata);
     GameEngine *engine = new GameEngine;
     engine->start();
+
     return a.exec();
 }

@@ -4,7 +4,7 @@
 #include <iostream>
 #include <vector>
 
-City::City(std::shared_ptr<CourseSide::SimpleMainWindow> ui) :
+City::City(std::shared_ptr<MainWindow> ui) :
     gameOver_(false),
     ui_(ui)
 {
@@ -49,6 +49,12 @@ void City::startGame()
 void City::addActor(std::shared_ptr<Interface::IActor> newactor)
 {
     actors_.push_back(newactor);
+
+    Interface::Location newactorLocation = newactor->giveLocation();
+    RectItem* nActor = new RectItem(newactorLocation.giveX(), 500-newactorLocation.giveY());
+    ui_->addItem(nActor);
+
+    actorItems_[newactor] = nActor;
 }
 
 void City::removeActor(std::shared_ptr<Interface::IActor> actor)
@@ -75,7 +81,8 @@ bool City::findActor(std::shared_ptr<Interface::IActor> actor) const
 
 void City::actorMoved(std::shared_ptr<Interface::IActor> actor)
 {
-
+    actorItems_.at(actor)->setX(actor->giveLocation().giveX());
+    actorItems_.at(actor)->setY(500-actor->giveLocation().giveY());
 }
 
 std::vector<std::shared_ptr<Interface::IActor> > City::getNearbyActors(Interface::Location loc) const
