@@ -42,9 +42,9 @@ void MainWindow::setTick(int t)
     tick_ = t;
 }
 
-void MainWindow::addActor(int locX, int locY, int type)
+void MainWindow::addActor(int locX, int locY)
 {
-    RectItem* nActor = new RectItem(locX, locY, type);
+    Item* nActor = new Item(locX, locY);
     actors_.push_back(nActor);
     map->addItem(nActor);
     last_ = nActor;

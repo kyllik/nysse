@@ -2,7 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "rectitem.h"
+#include "item.h"
 
 namespace Ui {
 class MainWindow;
@@ -19,7 +19,7 @@ public:
     void setSize(int w, int h);
     void setTick(int t);
 
-    virtual void addActor(int locX, int locY, int type = 0);
+    virtual void addActor(int locX, int locY);
     void updateCoords(int nX, int nY);
     void setPicture(QImage &img);
 
@@ -36,7 +36,7 @@ private:
     QGraphicsScene *map;
     QTimer *timer;
     QVector<QGraphicsItem*> actors_;
-    RectItem* last_;
+    Item* last_;
 
     int width_ = 500; //pxls
     int height_ = 500;

@@ -9,10 +9,11 @@ SOURCES += \
     city.cpp \
     creategame.cpp \
     gameengine.cpp \
+    item.cpp \
     main.cc \
     mainwindow.cpp \
-    rectitem.cpp \
     ufo.cpp
+    openingdialog.cpp
 
 win32:CONFIG(release, debug|release): LIBS += \
     -L$$OUT_PWD/../Course/CourseLib/release/ -lCourseLib
@@ -41,9 +42,11 @@ else:unix: PRE_TARGETDEPS += \
 HEADERS += \
     city.hh \
     gameengine.hh \
+    item.h \
     mainwindow.h \
-    rectitem.h \
     ufo.hh
+    openingdialog.hh
 
 FORMS += \
     mainwindow.ui
+    openingdialog.ui

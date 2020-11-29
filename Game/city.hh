@@ -10,7 +10,7 @@
 #include "graphics/simplemainwindow.hh"
 #include "graphics/simpleactoritem.hh"
 #include "ufo.hh"
-#include "rectitem.h"
+#include "item.h"
 #include "mainwindow.h"
 
 #include <QDebug>
@@ -42,8 +42,8 @@ public:
 private:
     std::vector< std::shared_ptr<Interface::IActor> > actors_;
     std::vector< std::shared_ptr<Interface::IStop> > stops_;
-    std::map< std::shared_ptr<Interface::IActor>, RectItem* > actorItems_;
-    std::map< std::shared_ptr<Interface::IStop>, std::shared_ptr<CourseSide::SimpleActorItem> > stopItems_;
+    std::map< std::shared_ptr<Interface::IActor>, Item* > actorItems_;
+    std::map< std::shared_ptr<Interface::IStop>, Item* > stopItems_;
     bool gameOver_;
 
     QImage backgroundSmall_;

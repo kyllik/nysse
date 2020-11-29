@@ -3,6 +3,7 @@
 #include <QTime>
 #include <iostream>
 #include <vector>
+#include <QDebug>
 
 City::City(std::shared_ptr<MainWindow> ui) :
     gameOver_(false),
@@ -30,14 +31,13 @@ void City::setClock(QTime clock)
 void City::addStop(std::shared_ptr<Interface::IStop> stop)
 {
     stops_.push_back(stop);
-    int x = stop->getLocation().giveX();
-    int y = stop->getLocation().giveY();
 
-    std::shared_ptr<CourseSide::SimpleActorItem> stopItem =
-            std::make_shared<CourseSide::SimpleActorItem>(x,y);
-    stopItems_.insert(std::pair<std::shared_ptr<Interface::IStop>,
-                      std::shared_ptr<CourseSide::SimpleActorItem>>(stop,stopItem));
-    ui_->addActor(x,500-y);
+    Interface::Location stopLocation = stop->getLocation();
+    Item* newitem = new Item(stopLocation.giveX(), 500-stopLocation.giveY());
+
+    stopItems_[stop] = newitem;
+
+    ui_->addItem(newitem);
 }
 
 void City::startGame()
@@ -50,11 +50,30 @@ void City::addActor(std::shared_ptr<Interface::IActor> newactor)
 {
     actors_.push_back(newactor);
 
-    Interface::Location newactorLocation = newactor->giveLocation();
-    RectItem* nActor = new RectItem(newactorLocation.giveX(), 500-newactorLocation.giveY());
-    ui_->addItem(nActor);
+    QColor color;
+    int height, width;
+    bool shape;
 
-    actorItems_[newactor] = nActor;
+    std::shared_ptr<Interface::IVehicle> nysse = std::dynamic_pointer_cast<Interface::IVehicle>(newactor);
+    if(nysse==nullptr) {
+        //matkustaja
+        color = Qt::green;
+        height = 5;
+        width = 5;
+        shape = 1;
+    } else {
+        //bussi
+        color = Qt::blue;
+        height = 10;
+        width = 20;
+        shape = 0;
+    }
+
+    Interface::Location newactorLocation = newactor->giveLocation();
+    Item* newitem = new Item(newactorLocation.giveX(), 500-newactorLocation.giveY(), color, height, width, shape);
+    ui_->addItem(newitem);
+
+    actorItems_[newactor] = newitem;
 }
 
 void City::removeActor(std::shared_ptr<Interface::IActor> actor)

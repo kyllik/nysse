@@ -14,14 +14,12 @@
 #include <QVector>
 #include <map>
 
-const int WIDTH = 10;
-const int HEIGHT = 10;
 
-class RectItem : public QGraphicsItem
+class Item : public QGraphicsItem
 {
 public:
-    RectItem(int x, int y, int type = 0);
-    virtual ~RectItem();
+    Item(int x, int y, QColor color = Qt::red, int height = 10, int width = 10, bool shape = 0);
+    virtual ~Item();
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
@@ -30,7 +28,10 @@ public:
 private:
     int x_;
     int y_;
-    int type_;
+    QColor color_;
+    int height_ = 10;
+    int width_ = 10;
+    bool shape_;
 };
 
 #endif // RECTITEM_H
