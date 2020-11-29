@@ -1,7 +1,7 @@
 #ifndef STATISTICS_HH
 #define STATISTICS_HH
 
-#include "interfaces/istatistics.hh"
+#include "../Course/CourseLib/interfaces/istatistics.hh"
 
 class Statistics : public virtual Interface::IStatistics
 {
@@ -13,8 +13,10 @@ public:
     void newNysse() override;
     void nysseLeft() override;
 
-    void addScore(int num);
+    int getPassengers() const;
+    int getBuses() const;
     int getScore() const;
+    void addScore(int num);
 
 private:
     int passengers_;

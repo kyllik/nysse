@@ -31,12 +31,23 @@ void Statistics::nysseLeft()
 
 }
 
-void Statistics::addScore(int num)
+int Statistics::getPassengers() const
 {
-    score_ += num;
+    return passengers_;
+}
+
+int Statistics::getBuses() const
+{
+    return buses_;
 }
 
 int Statistics::getScore() const
 {
     return score_;
 }
+
+void Statistics::addScore(int num)
+{
+    score_ += num;
+}
+
