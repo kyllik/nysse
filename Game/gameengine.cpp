@@ -27,9 +27,8 @@ void GameEngine::start()
     QImage backgroundSmall = QImage(DEFAULT_BACKGROUND_SMALL);
     QImage backgroundBig = QImage(DEFAULT_BACKGROUND_BIG);
     city_->setBackground(backgroundSmall,backgroundBig);
-    city_->startGame();
 
     logic_->fileConfig();
-    logic_->setTime(9,0);
+    logic_->setTime(21,18);
     logic_->finalizeGameStart();
 }

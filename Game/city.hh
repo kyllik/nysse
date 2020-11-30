@@ -50,7 +50,6 @@ private:
     QImage backGroundBig_;
     QTime clock_;
     std::shared_ptr<MainWindow> ui_;
-
 };
 
 #endif // CITY_HH

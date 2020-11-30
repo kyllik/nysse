@@ -21,7 +21,6 @@ private:
     std::shared_ptr<CourseSide::SimpleMainWindow> ui_;
     std::shared_ptr<City> city_;
     std::shared_ptr<CourseSide::Logic> logic_;
-    std::shared_ptr<Ufo> ufo_;
 };
 
 #endif // GAMEENGINE_HH

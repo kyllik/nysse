@@ -18,7 +18,7 @@
 class Item : public QGraphicsItem
 {
 public:
-    Item(int x, int y, QColor color = Qt::red, int height = 10, int width = 10, bool shape = 0);
+    Item(int x, int y, QColor color = Qt::red, int height = 10, int width = 10, bool shape = 1);
     virtual ~Item();
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);

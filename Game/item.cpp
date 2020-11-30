@@ -13,7 +13,7 @@ Item::~Item()
 
 QRectF Item::boundingRect() const
 {
-    return QRectF(0, 0, width_, height_);
+    return QRectF(0,0, width_, height_);
 }
 
 void Item::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -21,7 +21,8 @@ void Item::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     QRectF bounds = boundingRect();
     QBrush brush(color_);
     painter->setBrush(brush);
-    if(shape_==0) {
+
+    if(shape_==false) {
         painter->drawRect(bounds);
     } else {
         painter->drawEllipse(bounds);

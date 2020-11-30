@@ -9,7 +9,6 @@ City::City(std::shared_ptr<MainWindow> ui) :
     gameOver_(false),
     ui_(ui)
 {
-
 }
 
 City::~City()
@@ -56,13 +55,11 @@ void City::addActor(std::shared_ptr<Interface::IActor> newactor)
 
     std::shared_ptr<Interface::IVehicle> nysse = std::dynamic_pointer_cast<Interface::IVehicle>(newactor);
     if(nysse==nullptr) {
-        //matkustaja
         color = Qt::green;
         height = 5;
         width = 5;
         shape = 1;
     } else {
-        //bussi
         color = Qt::blue;
         height = 10;
         width = 20;
