@@ -21,14 +21,18 @@ public:
     bool isRemoved() const;
     void remove();
 
-    void setSpeed(int v);
+    void setSpeed(int vx, int vy);
     void setCity(std::shared_ptr<Interface::ICity> city);
+
+    int getXSpeed();
+    int getYSpeed();
     void capture(std::shared_ptr<Interface::IActor>);
 
 private:
     std::shared_ptr<Interface::ICity> city_;
     Interface::Location location_;
-    int speed_;
+    int xSpeed_;
+    int ySpeed_;
     bool removed_;
 
 };

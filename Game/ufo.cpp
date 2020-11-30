@@ -1,7 +1,8 @@
 #include "ufo.hh"
 
 Ufo::Ufo() :
-    speed_(0),
+    xSpeed_(0),
+    ySpeed_(0),
     removed_(false)
 {
 }
@@ -31,14 +32,25 @@ void Ufo::remove()
     removed_ = true;
 }
 
-void Ufo::setSpeed(int v)
+void Ufo::setSpeed(int vx,int vy)
 {
-    speed_ = v;
+    xSpeed_ = vx;
+    ySpeed_ = vy;
 }
 
 void Ufo::setCity(std::shared_ptr<Interface::ICity> city)
 {
     city_ = city;
+}
+
+int Ufo::getXSpeed()
+{
+    return xSpeed_;
+}
+
+int Ufo::getYSpeed()
+{
+    return ySpeed_;
 }
 
 void Ufo::capture(std::shared_ptr<Interface::IActor>)

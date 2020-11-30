@@ -42,23 +42,19 @@ MainWindow::~MainWindow()
 void MainWindow::keyPressEvent(QKeyEvent *event)
 {
     if(event->key()==Qt::Key_W) {
-        ufo_x_speed_ = 0;
-        ufo_y_speed_ = -1;
+        ufoObject_->setSpeed(0,-1);
     }
 
     if(event->key()==Qt::Key_S) {
-        ufo_x_speed_ = 0;
-        ufo_y_speed_ = 1;
+        ufoObject_->setSpeed(0,1);
     }
 
     if(event->key()==Qt::Key_A) {
-        ufo_x_speed_ = -1;
-        ufo_y_speed_ = 0;
+        ufoObject_->setSpeed(-1,0);
     }
 
     if(event->key()==Qt::Key_D) {
-        ufo_x_speed_ = 1;
-        ufo_y_speed_ = 0;
+        ufoObject_->setSpeed(1,0);
     }
 }
 
@@ -102,13 +98,15 @@ void MainWindow::on_startButton_clicked()
 {
     qDebug() << "Start clicked";
     emit gameStarted();
-    ufo_x_speed_=1;
 }
 
 void MainWindow::ufo_move()
 {
-    if(480>ufoItem_->x()+ufo_x_speed_ && 0<ufoItem_->x()+ufo_x_speed_ &&
-            480>ufoItem_->y()+ufo_y_speed_ && 0<ufoItem_->y()+ufo_y_speed_) {
-        ufoItem_->moveBy(ufo_x_speed_, ufo_y_speed_);
+    if(480>ufoItem_->x()+ufoObject_->getXSpeed() && 0<ufoItem_->x()+ufoObject_->getXSpeed() &&
+            480>ufoItem_->y()+ufoObject_->getYSpeed() && 0<ufoItem_->y()+ufoObject_->getYSpeed()) {
+        ufoItem_->moveBy(ufoObject_->getXSpeed(), ufoObject_->getYSpeed());
+        Interface::Location loc;
+        loc.setXY(ufoItem_->x(),ufoItem_->y());
+        ufoObject_->move(loc);
     }
 }
