@@ -33,23 +33,23 @@
        </widget>
       </item>
       <item>
-       <widget class="QRadioButton" name="radioButton1">
+       <widget class="QRadioButton" name="radioButton30s">
+        <property name="text">
+         <string>30 seconds</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="radioButton2min">
         <property name="text">
          <string>1 minute</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QRadioButton" name="radioButton5">
+       <widget class="QRadioButton" name="radioButton1min">
         <property name="text">
-         <string>3 minutes</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QRadioButton" name="radioButton3">
-        <property name="text">
-         <string>5 minutes</string>
+         <string>2 minutes</string>
         </property>
        </widget>
       </item>

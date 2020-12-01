@@ -12,6 +12,7 @@ SOURCES += \
     item.cpp \
     main.cc \
     mainwindow.cpp \
+    openingdialog.cpp \
     ufo.cpp
     openingdialog.cpp
 
@@ -44,9 +45,11 @@ HEADERS += \
     gameengine.hh \
     item.h \
     mainwindow.h \
+    openingdialog.hh \
     ufo.hh
     openingdialog.hh
 
 FORMS += \
-    mainwindow.ui
+    mainwindow.ui \
+    openingdialog.ui
     openingdialog.ui

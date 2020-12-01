@@ -8,7 +8,9 @@ const int UFO_SIZE = 20;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow)
+    ui(new Ui::MainWindow),
+    dialog(new OpeningDialog),
+    gameTime(0)
 {
     ui->setupUi(this);
     ui->gameView->setFixedSize(width_+10, height_+10);
@@ -32,6 +34,12 @@ MainWindow::MainWindow(QWidget *parent) :
     addItem(ufoItem_);
     ufoItem_->setZValue(100);
     connect(timer, &QTimer::timeout, this, &MainWindow::ufo_move);
+
+    connect(dialog,&OpeningDialog::tellGameLenght,this, &MainWindow::setGameTime);
+
+    gameTimer = new QTimer(this);
+    connect(gameTimer,&QTimer::timeout, this,&MainWindow::advanceGameTime);
+    dialog->exec();
 }
 
 MainWindow::~MainWindow()
@@ -108,5 +116,20 @@ void MainWindow::ufo_move()
         Interface::Location loc;
         loc.setXY(ufoItem_->x(),ufoItem_->y());
         ufoObject_->move(loc);
+    }
+}
+
+void MainWindow::setGameTime(int time)
+{
+    gameTime = time;
+    ui->gameTimeLcdNumber->display(gameTime);
+    gameTimer->start(1000);
+}
+
+void MainWindow::advanceGameTime()
+{
+    if(gameTime > 0){
+        gameTime -= 1;
+        ui->gameTimeLcdNumber->display(gameTime);
     }
 }

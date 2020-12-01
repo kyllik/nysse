@@ -1,5 +1,6 @@
 #include "creategame.hh"
 #include "city.hh"
+#include "openingdialog.hh"
 
 std::shared_ptr<Interface::ICity> Interface::createGame()
 {
