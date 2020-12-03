@@ -14,6 +14,7 @@ SOURCES += \
     main.cc \
     mainwindow.cpp \
     openingdialog.cpp \
+    scoremultiplier.cpp \
     statistics.cpp \
     ufo.cpp
     openingdialog.cpp
@@ -49,6 +50,7 @@ HEADERS += \
     item.h \
     mainwindow.h \
     openingdialog.hh \
+    scoremultiplier.hh \
     statistics.hh \
     ufo.hh
     openingdialog.hh
