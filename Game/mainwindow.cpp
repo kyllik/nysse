@@ -10,6 +10,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
     dialog(new OpeningDialog),
+    score_(new Statistics),
     gameTime(0)
 {
     ui->setupUi(this);
@@ -131,5 +132,18 @@ void MainWindow::advanceGameTime()
     if(gameTime > 0){
         gameTime -= 1;
         ui->gameTimeLcdNumber->display(gameTime);
+    } else {
+        gameTimer->stop();
+        ufoObject_->setSpeed(0,0);
+        endGame();
     }
+}
+
+void MainWindow::endGame()
+{
+    EndingDialog *endDialog = new EndingDialog();
+    connect(endDialog,&EndingDialog::closeGame,this,&MainWindow::close);
+    connect(endDialog,&EndingDialog::closeGame,endDialog,&EndingDialog::close);
+    endDialog->show();
+    endDialog->showScore(score_->getScore());
 }

@@ -8,11 +8,13 @@ CONFIG += c++14
 SOURCES += \
     city.cpp \
     creategame.cpp \
+    endingdialog.cpp \
     gameengine.cpp \
     item.cpp \
     main.cc \
     mainwindow.cpp \
     openingdialog.cpp \
+    statistics.cpp \
     ufo.cpp
     openingdialog.cpp
 
@@ -42,14 +44,17 @@ else:unix: PRE_TARGETDEPS += \
 
 HEADERS += \
     city.hh \
+    endingdialog.hh \
     gameengine.hh \
     item.h \
     mainwindow.h \
     openingdialog.hh \
+    statistics.hh \
     ufo.hh
     openingdialog.hh
 
 FORMS += \
+    endingdialog.ui \
     mainwindow.ui \
     openingdialog.ui
     openingdialog.ui

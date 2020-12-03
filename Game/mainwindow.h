@@ -2,9 +2,11 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "endingdialog.hh"
 #include "openingdialog.hh"
 #include "item.h"
 #include "ufo.hh"
+#include "statistics.hh"
 
 namespace Ui {
 class MainWindow;
@@ -39,6 +41,9 @@ private slots:
     void advanceGameTime();
 
 private:
+
+   void endGame();
+
     Ui::MainWindow *ui;
     QGraphicsScene *map;
     QTimer *timer;
@@ -48,6 +53,8 @@ private:
     Item* ufoItem_;
     Ufo* ufoObject_;
     QTimer *gameTimer;
+    Statistics *score_;
+
 
     int gameTime;
     int width_ = 500; //pxls
