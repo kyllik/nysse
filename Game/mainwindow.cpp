@@ -65,6 +65,9 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
     if(event->key()==Qt::Key_D) {
         ufoObject_->setSpeed(1,0);
     }
+    if(event->key()==Qt::Key_Space) {
+        ufoObject_->capture();
+    }
 }
 
 void MainWindow::setSize(int w, int h)
@@ -103,6 +106,11 @@ void MainWindow::addItem(Item *item)
     last_ = item;
 }
 
+Ufo* MainWindow::returnUfo()
+{
+    return ufoObject_;
+}
+
 void MainWindow::on_startButton_clicked()
 {
     qDebug() << "Start clicked";
@@ -115,7 +123,7 @@ void MainWindow::ufo_move()
             480>ufoItem_->y()+ufoObject_->getYSpeed() && 0<ufoItem_->y()+ufoObject_->getYSpeed()) {
         ufoItem_->moveBy(ufoObject_->getXSpeed(), ufoObject_->getYSpeed());
         Interface::Location loc;
-        loc.setXY(ufoItem_->x(),ufoItem_->y());
+        loc.setXY(ufoItem_->x(),500-ufoItem_->y());
         ufoObject_->move(loc);
     }
 }

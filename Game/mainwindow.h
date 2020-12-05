@@ -30,6 +30,8 @@ public:
     void setPicture(QImage &img);
 
     void addItem(Item* item);
+    Ufo* returnUfo();
+
 public slots:
     void setGameTime(int time);
 signals:
@@ -59,7 +61,7 @@ private:
     int gameTime;
     int width_ = 500; //pxls
     int height_ = 500;
-    int tick_ = 5; //ms
+    int tick_ = 7; //ms
 };
 
 #endif // MAINWINDOW_H

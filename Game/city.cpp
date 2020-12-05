@@ -76,6 +76,13 @@ void City::addActor(std::shared_ptr<Interface::IActor> newactor)
 void City::removeActor(std::shared_ptr<Interface::IActor> actor)
 {
     actor->remove();
+    delete actorItems_.at(actor);
+    actorItems_.erase(actor);
+    auto it = find(actors_.begin(), actors_.end(), actor);
+    if (it != actors_.end()) {
+        int index = it - actors_.begin();
+        actors_.erase(actors_.begin()+index);
+    }
 }
 
 void City::actorRemoved(std::shared_ptr<Interface::IActor> actor)
@@ -105,7 +112,7 @@ std::vector<std::shared_ptr<Interface::IActor> > City::getNearbyActors(Interface
 {
     std::vector<std::shared_ptr<Interface::IActor> > nearbyActors = {};
     for (std::shared_ptr<Interface::IActor> actor : actors_){
-        if (actor->giveLocation().isClose(loc)){
+        if (actor->giveLocation().isClose(loc, 20)){
             nearbyActors.push_back(actor);
         }
     }

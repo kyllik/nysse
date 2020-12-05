@@ -1,4 +1,5 @@
 #include "ufo.hh"
+#include "QDebug"
 
 Ufo::Ufo() :
     xSpeed_(0),
@@ -53,7 +54,11 @@ int Ufo::getYSpeed()
     return ySpeed_;
 }
 
-void Ufo::capture(std::shared_ptr<Interface::IActor>)
+void Ufo::capture()
 {
-
+    qDebug() << "actors nearby: " << city_->getNearbyActors(location_).size();
+    for( auto actor : city_->getNearbyActors(location_) ) {
+        city_->removeActor(actor);
+    }
+    qDebug() << location_.giveX() << location_.giveY();
 }

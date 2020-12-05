@@ -20,6 +20,7 @@ void GameEngine::start()
     std::shared_ptr<MainWindow> ui = std::make_shared<MainWindow>();
     std::shared_ptr<Interface::ICity> city;
     city_ = std::make_shared<City>(ui);
+    ui->returnUfo()->setCity(city_);
 
     logic_ = std::make_shared<CourseSide::Logic>();
     logic_->takeCity(city_);
@@ -29,6 +30,7 @@ void GameEngine::start()
     city_->setBackground(backgroundSmall,backgroundBig);
 
     logic_->fileConfig();
-    logic_->setTime(21,18);
+
+    logic_->setTime(9,0);
     logic_->finalizeGameStart();
 }

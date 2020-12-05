@@ -26,7 +26,7 @@ public:
 
     int getXSpeed();
     int getYSpeed();
-    void capture(std::shared_ptr<Interface::IActor>);
+    void capture();
 
 private:
     std::shared_ptr<Interface::ICity> city_;
