@@ -26,7 +26,7 @@ public:
 
     int getXSpeed();
     int getYSpeed();
-    void capture();
+    int capture();
 
 private:
     std::shared_ptr<Interface::ICity> city_;

@@ -54,11 +54,13 @@ int Ufo::getYSpeed()
     return ySpeed_;
 }
 
-void Ufo::capture()
+int Ufo::capture()
 {
-    qDebug() << "actors nearby: " << city_->getNearbyActors(location_).size();
+    int captured = city_->getNearbyActors(location_).size();
+    qDebug() << "actors nearby: " << captured;
     for( auto actor : city_->getNearbyActors(location_) ) {
         city_->removeActor(actor);
     }
     qDebug() << location_.giveX() << location_.giveY();
+    return captured;
 }

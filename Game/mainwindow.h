@@ -7,6 +7,7 @@
 #include "item.h"
 #include "ufo.hh"
 #include "statistics.hh"
+#include "scoremultiplier.hh"
 
 namespace Ui {
 class MainWindow;
@@ -41,9 +42,11 @@ private slots:
     void on_startButton_clicked();
     void ufo_move();
     void advanceGameTime();
+    void spawnMultiplier();
 
 private:
-
+   int multiplierCaptured();
+   void setMultiplier(int n);
    void endGame();
 
     Ui::MainWindow *ui;
@@ -56,9 +59,11 @@ private:
     Ufo* ufoObject_;
     QTimer *gameTimer;
     Statistics *score_;
-
+    std::map< std::shared_ptr<ScoreMultiplier>, Item*> multipliers_;
+    QTimer *multiplierTimer;
 
     int gameTime;
+    int multiplier;
     int width_ = 500; //pxls
     int height_ = 500;
     int tick_ = 7; //ms

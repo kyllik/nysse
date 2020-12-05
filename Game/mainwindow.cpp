@@ -11,7 +11,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow),
     dialog(new OpeningDialog),
     score_(new Statistics),
-    gameTime(0)
+    gameTime(0),
+    multiplier(1)
 {
     ui->setupUi(this);
     ui->gameView->setFixedSize(width_+10, height_+10);
@@ -38,9 +39,14 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(dialog,&OpeningDialog::tellGameLenght,this, &MainWindow::setGameTime);
 
+    multiplierTimer = new QTimer(this);
+    connect(multiplierTimer,&QTimer::timeout, this,&MainWindow::spawnMultiplier);
+
     gameTimer = new QTimer(this);
     connect(gameTimer,&QTimer::timeout, this,&MainWindow::advanceGameTime);
     dialog->exec();
+
+
 }
 
 MainWindow::~MainWindow()
@@ -66,7 +72,9 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
         ufoObject_->setSpeed(1,0);
     }
     if(event->key()==Qt::Key_Space) {
-        ufoObject_->capture();
+        setMultiplier(multiplierCaptured());
+        score_->addScore(multiplier*ufoObject_->capture());
+        ui->scoreLcdNumber->display(score_->getScore());
     }
 }
 
@@ -133,6 +141,7 @@ void MainWindow::setGameTime(int time)
     gameTime = time;
     ui->gameTimeLcdNumber->display(gameTime);
     gameTimer->start(1000);
+    multiplierTimer->start(15000);
 }
 
 void MainWindow::advanceGameTime()
@@ -141,14 +150,49 @@ void MainWindow::advanceGameTime()
         gameTime -= 1;
         ui->gameTimeLcdNumber->display(gameTime);
     } else {
-        gameTimer->stop();
-        ufoObject_->setSpeed(0,0);
         endGame();
     }
 }
 
+void MainWindow::spawnMultiplier()
+{
+    std::shared_ptr<ScoreMultiplier> newMultiplier = std::make_shared<ScoreMultiplier>();
+    Interface::Location loc;
+    float x;
+    float y;
+    x = static_cast<float>(width_)*static_cast<float>(rand()/static_cast<float>(RAND_MAX));
+    y = static_cast<float>(height_)*static_cast<float>(rand()/static_cast<float>(RAND_MAX));
+    loc.setXY(static_cast<int>(x),static_cast<int>(y));
+    newMultiplier->move(loc);
+    newMultiplier->setMultiplier(200);
+    Item *newItem = new Item(static_cast<int>(x),static_cast<int>(y),Qt::yellow,20,20);
+    multipliers_[newMultiplier] = newItem;
+    addItem(newItem);
+}
+
+int MainWindow::multiplierCaptured()
+{
+    for(auto actor: multipliers_){
+        if (ufoObject_->giveLocation().isClose(actor.first->giveLocation(),20)){
+            int newMultiplier = actor.first->getMultiplier();
+            actor.first->remove();
+            delete multipliers_.at(actor.first);
+            multipliers_.erase(actor.first);
+            return newMultiplier;
+        }
+    } return 1;
+}
+
+void MainWindow::setMultiplier(int n)
+{
+    multiplier = multiplier * n;
+}
+
 void MainWindow::endGame()
 {
+    multiplierTimer->stop();
+    gameTimer->stop();
+    ufoObject_->setSpeed(0,0);
     EndingDialog *endDialog = new EndingDialog();
     connect(endDialog,&EndingDialog::closeGame,this,&MainWindow::close);
     connect(endDialog,&EndingDialog::closeGame,endDialog,&EndingDialog::close);
