@@ -164,8 +164,9 @@ void MainWindow::spawnMultiplier()
     y = static_cast<float>(height_)*static_cast<float>(rand()/static_cast<float>(RAND_MAX));
     loc.setXY(static_cast<int>(x),static_cast<int>(y));
     newMultiplier->move(loc);
-    newMultiplier->setMultiplier(200);
-    Item *newItem = new Item(static_cast<int>(x),static_cast<int>(y),Qt::yellow,20,20);
+    newMultiplier->setMultiplier(2);
+    Item *newItem = new Item(newMultiplier->giveLocation().giveX(),
+                             500-newMultiplier->giveLocation().giveY(),Qt::yellow,20,20);
     multipliers_[newMultiplier] = newItem;
     addItem(newItem);
 }
@@ -173,14 +174,19 @@ void MainWindow::spawnMultiplier()
 int MainWindow::multiplierCaptured()
 {
     for(auto actor: multipliers_){
+        qDebug() <<  ufoObject_->giveLocation().giveX() << ufoObject_->giveLocation().giveY();
+        qDebug() << 'l' << actor.first->giveLocation().giveX() << actor.first->giveLocation().giveY();
         if (ufoObject_->giveLocation().isClose(actor.first->giveLocation(),20)){
             int newMultiplier = actor.first->getMultiplier();
             actor.first->remove();
             delete multipliers_.at(actor.first);
             multipliers_.erase(actor.first);
+            qDebug() << "new multiplier:" << newMultiplier;
             return newMultiplier;
         }
-    } return 1;
+    }
+    qDebug() << "new multiplier:" << 1;
+    return 1;
 }
 
 void MainWindow::setMultiplier(int n)
@@ -194,6 +200,7 @@ void MainWindow::endGame()
     gameTimer->stop();
     ufoObject_->setSpeed(0,0);
     EndingDialog *endDialog = new EndingDialog();
+    endDialog->setModal(true);
     connect(endDialog,&EndingDialog::closeGame,this,&MainWindow::close);
     connect(endDialog,&EndingDialog::closeGame,endDialog,&EndingDialog::close);
     endDialog->show();
