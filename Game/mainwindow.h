@@ -35,11 +35,8 @@ public:
 
 public slots:
     void setGameTime(int time);
-signals:
-    void gameStarted();
 
 private slots:
-    void on_startButton_clicked();
     void ufo_move();
     void advanceGameTime();
     void spawnMultiplier();

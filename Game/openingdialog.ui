@@ -40,14 +40,14 @@
        </widget>
       </item>
       <item>
-       <widget class="QRadioButton" name="radioButton2min">
+       <widget class="QRadioButton" name="radioButton1min">
         <property name="text">
          <string>1 minute</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QRadioButton" name="radioButton1min">
+       <widget class="QRadioButton" name="radioButton2min">
         <property name="text">
          <string>2 minutes</string>
         </property>

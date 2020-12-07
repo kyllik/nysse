@@ -16,9 +16,9 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->gameView->setFixedSize(width_+10, height_+10);
-    ui->centralwidget->setFixedSize(width_ + ui->startButton->width() + PADDING, height_ + PADDING);
+    ui->centralwidget->setFixedSize(width_ + ui->gameTimeLcdNumber->width() + PADDING, height_ + PADDING);
 
-    ui->startButton->move(width_ + PADDING , PADDING);
+    ui->gameTimeLcdNumber->move(width_ + PADDING , PADDING);
 
     map = new QGraphicsScene(this);
     ui->gameView->setScene(map);
@@ -26,7 +26,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     resize(minimumSizeHint());
 
-    ui->lcdNumber->display(multiplier);
+    ui->multiplierLcdNumber ->display(multiplier);
 
     timer = new QTimer(this);
     connect(timer, &QTimer::timeout, map, &QGraphicsScene::advance);
@@ -118,12 +118,6 @@ Ufo* MainWindow::returnUfo()
     return ufoObject_;
 }
 
-void MainWindow::on_startButton_clicked()
-{
-    qDebug() << "Start clicked";
-    emit gameStarted();
-}
-
 void MainWindow::ufo_move()
 {
     if(480>ufoItem_->x()+ufoObject_->getXSpeed() && 0<ufoItem_->x()+ufoObject_->getXSpeed() &&
@@ -173,25 +167,21 @@ void MainWindow::spawnMultiplier()
 int MainWindow::multiplierCaptured()
 {
     for(auto actor: multipliers_){
-        qDebug() <<  ufoObject_->giveLocation().giveX() << ufoObject_->giveLocation().giveY();
-        qDebug() << 'l' << actor.first->giveLocation().giveX() << actor.first->giveLocation().giveY();
         if (ufoObject_->giveLocation().isClose(actor.first->giveLocation(),20)){
             int newMultiplier = actor.first->getMultiplier();
             actor.first->remove();
             delete multipliers_.at(actor.first);
             multipliers_.erase(actor.first);
-            qDebug() << "new multiplier:" << newMultiplier;
             return newMultiplier;
         }
     }
-    qDebug() << "new multiplier:" << 1;
     return 1;
 }
 
 void MainWindow::setMultiplier(int n)
 {
     multiplier = multiplier * n;
-    ui->lcdNumber->display(multiplier);
+    ui->multiplierLcdNumber->display(multiplier);
 }
 
 void MainWindow::endGame()
