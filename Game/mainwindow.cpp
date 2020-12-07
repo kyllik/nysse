@@ -25,7 +25,8 @@ MainWindow::MainWindow(QWidget *parent) :
     map->setSceneRect(0,0,width_,height_);
 
     resize(minimumSizeHint());
-    //ui->gameView->fitInView(0,0, MAPWIDTH, MAPHEIGHT, Qt::KeepAspectRatio);
+
+    ui->lcdNumber->display(multiplier);
 
     timer = new QTimer(this);
     connect(timer, &QTimer::timeout, map, &QGraphicsScene::advance);
@@ -45,8 +46,6 @@ MainWindow::MainWindow(QWidget *parent) :
     gameTimer = new QTimer(this);
     connect(gameTimer,&QTimer::timeout, this,&MainWindow::advanceGameTime);
     dialog->exec();
-
-
 }
 
 MainWindow::~MainWindow()
@@ -192,6 +191,7 @@ int MainWindow::multiplierCaptured()
 void MainWindow::setMultiplier(int n)
 {
     multiplier = multiplier * n;
+    ui->lcdNumber->display(multiplier);
 }
 
 void MainWindow::endGame()
